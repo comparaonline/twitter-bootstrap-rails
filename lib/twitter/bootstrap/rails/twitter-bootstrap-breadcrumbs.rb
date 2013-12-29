@@ -17,7 +17,7 @@ module Twitter
 
       protected
 
-      def add_breadcrumb(name, url = '', options = {})
+      def add_bootstrap_breadcrumb(name, url = '', options = {})
         @breadcrumbs ||= []
         name = translate_breadcrumb(name, self.class.name) if name.is_a?(Symbol)
         url = eval(url.to_s) if url =~ /_path|_url|@/
@@ -33,7 +33,7 @@ module Twitter
         I18n.t name, :scope => scope
       end
 
-      def render_breadcrumbs(divider = '/')
+      def render_bootstrap_breadcrumbs(divider = '/')
         s = render :partial => 'twitter-bootstrap/breadcrumbs', :locals => {:divider => divider}
         s.first
       end
