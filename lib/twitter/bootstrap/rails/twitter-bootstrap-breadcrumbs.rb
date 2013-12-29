@@ -1,6 +1,6 @@
 module Twitter
   module Bootstrap
-    module BreadCrumbs
+    module BootstrapBreadCrumbs
       def self.included(base)
         base.extend(ClassMethods)
       end
