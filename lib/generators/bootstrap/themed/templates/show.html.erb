@@ -10,10 +10,32 @@
 <%- end -%>
 </dl>
 
+<table class="table table-striped table-bordered" style="width:50%;">
+  <thead>
+    <tr>
+      <th>Field Name</th>
+      <th>Field Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- columns.each do |column| -%>
+      <tr>
+        <td><strong><%%= model_class.human_attribute_name(:<%= column.name %>) %></strong></td>
+        <%- column.type == :boolean %>
+          <td><%%= (@<%= resource_name %>.<%= column.name %> ? "<i class='fa fa-check-circle-o' style='color: green; font-size: 20px;'></i>" : "<i class='fa fa-times-circle-o' style='color: red; font-size: 20px;'></i>").html_safe %></td>
+        <%- else %>
+          <td><%%= @<%= resource_name %>.<%= column.name %> %></td>
+        <%- end -%>
+      </tr>
+    <%- end -%>
+  </tbody>
+</table>
+
+
 <%%= link_to t('.back', :default => t("helpers.links.back")),
               <%= controller_routing_path %>_path, :class => 'btn btn-default'  %>
 <%%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_<%= singular_controller_routing_path %>_path(@<%= resource_name %>), :class => 'btn btn-default' %>
+              edit_<%= singular_controller_routing_path %>_path(@<%= resource_name %>), :class => 'btn btn-primary' %>
 <%%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               <%= singular_controller_routing_path %>_path(@<%= resource_name %>),
               :method => 'delete',
