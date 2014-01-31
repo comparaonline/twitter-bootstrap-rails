@@ -21,7 +21,7 @@
     <%- columns.each do |column| -%>
       <tr>
         <td><strong><%%= model_class.human_attribute_name(:<%= column.name %>) %></strong></td>
-        <%- column.type == :boolean %>
+        <%- if column.type == :boolean %>
           <td><%%= (@<%= resource_name %>.<%= column.name %> ? "<i class='fa fa-check-circle-o' style='color: green; font-size: 20px;'></i>" : "<i class='fa fa-times-circle-o' style='color: red; font-size: 20px;'></i>").html_safe %></td>
         <%- else %>
           <td><%%= @<%= resource_name %>.<%= column.name %> %></td>
