@@ -1,22 +1,22 @@
 module Twitter
   module Bootstrap
-    module Breadcrumbs
+    module BootstrapBreadCrumbs
       def self.included(base)
         base.extend(ClassMethods)
       end
 
       module ClassMethods
-        def add_breadcrumb(name, url = '', options = {})
+        def add_bootstrap_breadcrumb(name, url = '', options = {})
           options.merge! :klass => self.name
           before_filter options do |controller|
-            controller.send :add_breadcrumb, name, url, options
+            controller.send :add_bootstrap_breadcrumb, name, url, options
           end
         end
       end
 
       protected
 
-      def add_breadcrumb(name, url = '', options = {})
+      def add_bootstrap_breadcrumb(name, url = '', options = {})
         @breadcrumbs ||= []
 
         class_name = options.delete(:klass) || self.class.name
@@ -27,7 +27,7 @@ module Twitter
             url = url_helper if respond_to?(url_helper)
           end
 
-          name = translate_breadcrumb name, class_name
+          name = translate_bootstrap_breadcrumb name, class_name
         end
 
         unless name.is_a? String
@@ -40,7 +40,7 @@ module Twitter
         @breadcrumbs << {:name => name, :url => url, :options => options}
       end
 
-      def translate_breadcrumb(name, class_name)
+      def translate_bootstrap_breadcrumb(name, class_name)
         scope = [:breadcrumbs]
         namespace = class_name.underscore.split('/')
         namespace.last.sub!('_controller', '')
@@ -49,7 +49,7 @@ module Twitter
         I18n.t name, :scope => scope
       end
 
-      def render_breadcrumbs(divider = '/')
+      def render_bootstrap_breadcrumbs(divider = '/')
         s = render :partial => 'twitter-bootstrap/breadcrumbs', :locals => {:divider => divider}
         s.first
       end
